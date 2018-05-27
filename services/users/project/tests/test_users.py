@@ -5,11 +5,13 @@ from project.tests.base import BaseTestCase
 from project import db
 from project.api.models import User
 
+
 def add_user(username, email):
     user = User(username=username, email=email)
     db.session.add(user)
     db.session.commit()
     return user
+
 
 class TestUserService(BaseTestCase):
     """Tests for the Users Service."""
@@ -43,8 +45,8 @@ class TestUserService(BaseTestCase):
         with self.client:
             response = self.client.post(
                 '/users',
-                data = json.dumps({}),
-                content_type ='application/json',
+                data=json.dumps({}),
+                content_type='application/json',
                 )
             data = json.loads(response.data.decode())
             self.assertEqual(response.status_code, 400)
@@ -52,9 +54,9 @@ class TestUserService(BaseTestCase):
             self.assertIn('fail', data['status'])
 
     def test_add_user_invalid_json_keys(self):
-            """ Ensure error is thrown if the JSON object does not have a username key."""
-            with self.client:
-                response = self.client.post(
+        """ Ensure error thrown if JSON object has no username key."""
+        with self.client:
+            response = self.client.post(
                 '/users',
                 data=json.dumps({'email': 'test@test.com'}),
                 content_type='application/json',
@@ -134,7 +136,6 @@ class TestUserService(BaseTestCase):
         self.assertIn(
             'fletcher@notreal.com', data['data']['users'][1]['email'])
         self.assertIn('success', data['status'])
-
 
 
 if __name__ == '__main__':
