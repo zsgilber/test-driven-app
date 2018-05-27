@@ -28,10 +28,10 @@ class TestUserService(BaseTestCase):
             response = self.client.post(
                 '/users',
                 data=json.dumps({
-                'username': 'test',
-                'email': 'test@test.com'
-            }),
-            content_type='application/json',
+                    'username': 'test',
+                    'email': 'test@test.com'
+                    }),
+                content_type='application/json',
             )
         data = json.loads(response.data.decode())
         self.assertEqual(response.status_code, 201)
