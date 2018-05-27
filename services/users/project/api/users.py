@@ -51,10 +51,10 @@ def get_single_user(user_id):
     response_object = {
         'status': 'success',
         'data': {
-            'id': user.id
+            'id': user.id,
             'username': user.username,
             'email': user.email,
             'active': user.active
         }
     }
-    return jsonif(response_object), 200
+    return jsonify(response_object), 200
