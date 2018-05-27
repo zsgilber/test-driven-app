@@ -93,8 +93,8 @@ class TestUserService(BaseTestCase):
             response = self.client.get(f'/users/{user.id}')
             data = json.loads(response.data.decode())
         self.assertEqual(response.status_code, 200)
-        self.assertIn('test', data['message']['username'])
-        self.assertIn('test@test.com', data['message']['email'])
+        self.assertIn('test', data['data']['username'])
+        self.assertIn('test@test.com', data['data']['email'])
         self.assertIn('success', data['status'])
 
 
